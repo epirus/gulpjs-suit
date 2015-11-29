@@ -104,10 +104,23 @@ module.exports = {
 
 ```
 
+##环境变量的配置
+
+gulp会自动的需找上层的gulpfile的文件。使用上层目录。所以。可以在.bashrc或者 .zshrc文件中加入一个别名
+
+```bash
+alias gulp="gulp --cwd ."
+```
+这样你只需将这个package.json的文件当到/home的目录下 然后运行npm install
+
+只需一份的node_modules就可以了~ok
+
+
 ##to be continued
 
 * webpack import?
 * browser-syn to rewrite the livereload part?
+* may be docker-container
 
 ##总体还是挺好玩的
 
