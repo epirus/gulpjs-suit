@@ -27,8 +27,8 @@ gulp的关注点是什么？我觉得应该是关注这种任务的可自由自�
 
 这个可以自动开启px to rem的转换 默认设置是 1rem = 32px;
 这么设置的原因是跟一个sass的响应是有关系,
-{%  %}
 
+```javascript
 @function fit($browserWidth){
   $browserDefaultFontSize:100% !default;//变量的值可以根据自己需求定义
   @return $browserDefaultFontSize*$browserWidth/320;
@@ -61,8 +61,7 @@ release的基础就是会根据多个文件进行合并。 -p的意思就是将p
 
 html的模板是这个样子的
 
-{%  %}
-
+```javascript
 <html>
 <head>
 <!-- build:css css/lib.css -->
@@ -89,8 +88,7 @@ html的模板是这个样子的
 
 就是可以将release的目录中的文件发不到线上.这个需要引入一个ftpconfig.js的文件。只要配置对应的内容即可.
 
-{%  %}
-
+```javascript
 var gutil = require('gulp-util');
 module.exports = {
     remoteServer: {
@@ -112,4 +110,5 @@ module.exports = {
 * browser-syn to rewrite the livereload part?
 
 ##总体还是挺好玩的
+
 [Try About It](https://github.com/epirus/gulpjs-suit)
