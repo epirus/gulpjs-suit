@@ -1,11 +1,9 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
-var dir = require('./directory.js');
 var gulpif = require('gulp-if');
 var pxtorem = require('gulp-pxtorem');
 var open = require('gulp-open');
 var portfinder = require('portfinder');
-var currentDirectory = dir.currentDirectory;
 var autoprefixer = require('gulp-autoprefixer');
 var argv = require('minimist')(process.argv.slice(2));
 var os = require('os');
@@ -36,7 +34,7 @@ gulp.task('connect', function() {
         var serverConfiguration = {};
         serverConfiguration = {
             port:port,
-            root: currentDirectory,
+            root: './',
             livereload: {
                 port: port + 27729,
             },
@@ -82,7 +80,7 @@ gulp.task('open', function() {
             url: 'http://localhost:' + (port - 1) + page,
             app: 'google chrome'
         };
-        gulp.src(currentDirectory + 'index.html')
+        gulp.src(process.cwd()+ '/index.html')
             .pipe(open('', options));
     });
 });
@@ -103,7 +101,8 @@ var postcssOptions = {
 };
 
 gulp.task('livereload-sass', function() {
-    gulp.src(process.cwd()+ '/scss/*.scss')
+    var path=setPxtorem?'/scss/m-*.scss':'/scss/[^m-]*.scss';
+    gulp.src(process.cwd()+path)
         .pipe(sass().on('error', sass.logError))
         .pipe(
           autoprefixer({
@@ -122,7 +121,7 @@ gulp.task('livereload-sass', function() {
 
 var gutil = require('gulp-util');
 gulp.task('html', function() {
-    gulp.src(currentDirectory + '*.html')
+    gulp.src(process.cwd()+ '/*.html')
         .pipe(connect.reload())
         .on('end', function() {
             gutil.log(gutil.colors.magenta('<----------------') + gutil.colors.cyan(new Date().toLocaleTimeString().toString()) + gutil.colors.magenta('---------------->'));
